@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyan">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manindra Rongala | AI & ML Engineer Portfolio</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Portfolio of Manindra Rongala, an AI/ML Engineer specializing in Generative AI, RAG pipelines, Deep Learning, and Agentic AI workflows. Explore projects, experience, and skills.">
+    <meta name="keywords" content="Manindra Rongala, AI Engineer, ML Engineer, Generative AI, RAG, LangChain, Deep Learning, Portfolio, SRKR">
+    <meta name="author" content="Manindra Rongala">
+    
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="Manindra Rongala | AI & ML Engineer">
+    <meta property="og:description" content="AI & ML Engineer specializing in Generative AI, agentic systems, and deep learning. Check out my work.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://linkedin.com/in/manindra-rongala">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css?v=2.0">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.395.0"></script>
+</head>
+<body>
+    <!-- Premium Grid & Spotlight Background -->
+    <div class="grid-bg-overlay"></div>
+    <div class="mouse-spotlight" id="mouse-spotlight"></div>
+
+    <!-- Background Canvas for Ambient Bokeh -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Theme Customizer Panel -->
+    <div class="theme-switcher-widget" id="themeWidget">
+        <button class="theme-switcher-toggle" id="themeToggle" aria-label="Toggle Theme Customizer">
+            <i data-lucide="palette"></i>
+        </button>
+        <div class="theme-options">
+            <p class="theme-title">Theme Accent</p>
+            <div class="theme-colors">
+                <button class="color-dot active" data-theme="cyan" style="background-color: #0969DA;" title="GitHub Blue"></button>
+                <button class="color-dot" data-theme="purple" style="background-color: #8250DF;" title="GitHub Purple"></button>
+                <button class="color-dot" data-theme="emerald" style="background-color: #1A7F37;" title="GitHub Green"></button>
+                <button class="color-dot" data-theme="amber" style="background-color: #BF4F00;" title="GitHub Orange"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#home" class="logo">
+                <span class="logo-accent">&lt;</span>M<span class="logo-name">anindra</span><span class="logo-accent">.R /&gt;</span>
+            </a>
+            
+            <nav class="nav" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#contact" class="btn btn-outline nav-btn">Hire Me</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="section hero">
+            <div class="hero-container">
+                <div class="hero-content reveal">
+                    <div class="hero-badge">
+                        <span class="pulse-dot"></span> Available for Opportunities
+                    </div>
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="text-glow accent-text">Manindra Rongala</span>
+                    </h1>
+                    <h2 class="hero-subtitle">
+                        I build <span class="typing-text" id="typing-element"></span><span class="typed-cursor">|</span>
+                    </h2>
+                    <p class="hero-description">
+                        Specializing in <strong>Artificial Intelligence & Machine Learning</strong>. I build state-of-the-art agentic RAG architectures, custom LLM solutions, and low-latency API pipelines that bridge the gap between complex research and impactful software.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <span>Explore Projects</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/manindrarongala" target="_blank" rel="noopener" class="social-link" title="GitHub">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/manindra-rongala/" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/manindrarongala/" target="_blank" rel="noopener" class="social-link" title="Leetcode">
+                            <i data-lucide="code-2"></i>
+                        </a>
+                        <a href="mailto:rongalamanindra2004@gmail.com" class="social-link" title="Email">
+                            <i data-lucide="mail"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual reveal delay-2">
+                    <div class="code-terminal-card" id="tilt-card">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="terminal-tabs">
+                                <button class="term-tab active" id="btn-code-mode"><i data-lucide="file-code"></i> agent_pipeline.py</button>
+                                <button class="term-tab" id="btn-terminal-mode"><i data-lucide="terminal"></i> interactive.sh</button>
+                            </div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-mode-content active" id="terminal-code-view">
+                                <pre><code><span class="keyword">from</span> agents <span class="keyword">import</span> AgenticRAG
+
+rag = AgenticRAG()
+<span class="print">print</span>(<span class="string">"Status: Active 🚀"</span>)</code></pre>
+                            </div>
+                            <div class="terminal-mode-content" id="terminal-interactive-view">
+                                <div class="terminal-history" id="terminal-history">
+                                    <div class="terminal-line">Manindra OS v1.0.0 (Core Init)</div>
+                                    <div class="terminal-line">Connected: FAISS Vector Storage / Groq Llama-3.1 API</div>
+                                    <div class="terminal-line">Type <span class="accent-text">'help'</span> for a list of available commands.</div>
+                                </div>
+                                <div class="terminal-input-line">
+                                    <span class="terminal-prompt">guest@manindra:~$</span>
+                                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="Type a command...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
+            <div class="container">
+
+                <div class="about-grid">
+                    <div class="about-image-wrapper reveal">
+                        <div class="image-border-glow">
+                            <img src="./ai_network_avatar.png" alt="AI Neural Network - Manindra Rongala" class="about-image" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80'">
+                        </div>
+                    </div>
+                    
+                    <div class="about-info reveal delay-2">
+                        <h3 class="about-subtitle">AI & ML Engineer with a Results-Driven Mindset</h3>
+                        <p class="about-text">
+                            I am a specialized engineer in <strong>Artificial Intelligence and Machine Learning</strong> with hands-on experience building and deploying intelligent systems. My expertise spans across designing state-of-the-art Generative AI frameworks, building agentic RAG structures, natural language processing, and scalable backend services.
+                        </p>
+                        <p class="about-text">
+                            I have a passion for crafting real-world AI solutions that are not only theoretically sound but also highly optimized. My work has driven tangible metrics, including boosting database retrieval speeds, reducing voice agent latency, and improving response accuracies.
+                        </p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-value text-glow">8.62</span>
+                                <span class="stat-label">B.Tech CGPA</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value text-glow">350+</span>
+                                <span class="stat-label">Coding Problems</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value text-glow">30%</span>
+                                <span class="stat-label">Latency Reduction</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value text-glow">45%</span>
+                                <span class="stat-label">Relevance Boost</span>
+                            </div>
+                        </div>
+
+                        <div class="about-meta">
+                            <div class="meta-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Bhimavaram / Hyderabad, India</span>
+                            </div>
+                            <div class="meta-item">
+                                <i data-lucide="graduation-cap"></i>
+                                <span>SRKR Engineering College</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education Section -->
+        <section id="experience" class="section experience-section">
+            <div class="container">
+
+                <div class="journey-grid">
+                    <!-- Experience Timeline -->
+                    <div class="timeline-column reveal">
+                        <h3 class="column-title"><i data-lucide="briefcase"></i> Professional Experience</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-header-info">
+                                    <span class="timeline-date">Nov 2025 - Jan 2026</span>
+                                    <h4 class="timeline-role">Machine Learning Intern</h4>
+                                    <h5 class="timeline-company">Yanthraa Information System</h5>
+                                    <span class="timeline-location"><i data-lucide="map-pin"></i> Hyderabad, India</span>
+                                </div>
+                                <div class="timeline-body-content">
+                                    <ul>
+                                        <li>Engineered <strong>FastAPI</strong>-based AI voice agent services integrated with Electronic Health Record (EHR) systems, improving healthcare data processing speed by <strong>30%</strong>.</li>
+                                        <li>Optimized <strong>ElevenLabs</strong> voice agents and REST APIs, improving response accuracy by <strong>25%</strong> and significantly reducing end-to-end latency.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Timeline -->
+                    <div class="timeline-column reveal delay-2">
+                        <h3 class="column-title"><i data-lucide="graduation-cap"></i> Education</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-header-info">
+                                    <span class="timeline-date">2022 - 2026</span>
+                                    <h4 class="timeline-role">B.Tech in Artificial Intelligence & Machine Learning</h4>
+                                    <h5 class="timeline-company">Sagi Rama Krishnam Raju Engineering College (SRKR)</h5>
+                                    <span class="timeline-location"><i data-lucide="map-pin"></i> Bhimavaram, India</span>
+                                </div>
+                                <div class="timeline-body-content">
+                                    <p class="education-grade"><strong>Grade:</strong> CGPA: 8.62 / 10</p>
+                                    <p>Focused coursework on deep learning, neural networks, natural language processing, design and analysis of algorithms, and software engineering methodologies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects">
+            <div class="container">
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card reveal">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i data-lucide="cpu"></i>
+                            </div>
+                            <div class="project-header-right">
+                                <a href="https://github.com/manindrarongala/Agentic-RAG-DSA-Pipeline-Quiz-Generator" target="_blank" rel="noopener" class="project-header-link" title="Codebase">
+                                    <span>Codebase</span>
+                                    <i data-lucide="github"></i>
+                                </a>
+                                <span class="project-date">2026</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Agentic RAG DSA Pipeline & Quiz Generator</h3>
+                            <div class="project-metrics">
+                                <span class="metric-badge"><i data-lucide="trending-up"></i> +40% Retrieval Accuracy</span>
+                                <span class="metric-badge"><i data-lucide="shield-check"></i> -35% Hallucinations</span>
+                            </div>
+                            <p class="project-description">
+                                Built a hybrid Retrieval-Augmented Generation (RAG) pipeline across 20+ DSA topics and 500+ coding problems. Integrated FAISS vector search and BM25 keyword retrieval with reranking, significantly outperforming naive retrieval approaches.
+                            </p>
+                            <div class="project-tags">
+                                <span>RAG</span>
+                                <span>LangChain</span>
+                                <span>FAISS</span>
+                                <span>BM25</span>
+                                <span>Groq Llama-3.1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card reveal delay-1">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i data-lucide="search"></i>
+                            </div>
+                            <div class="project-header-right">
+                                <a href="https://github.com/manindrarongala/AI-Research-Assistant" target="_blank" rel="noopener" class="project-header-link" title="Codebase">
+                                    <span>Codebase</span>
+                                    <i data-lucide="github"></i>
+                                </a>
+                                <span class="project-date">2026</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">AI Research Assistant</h3>
+                            <div class="project-metrics">
+                                <span class="metric-badge"><i data-lucide="zap"></i> -30% Latency</span>
+                                <span class="metric-badge"><i data-lucide="sparkles"></i> +45% Relevance</span>
+                            </div>
+                            <p class="project-description">
+                                Designed an agent-based RAG system with multi-step reasoning, improving response relevance. Constructed a FastAPI + React application capable of processing 10,000+ documents with highly optimized background queues and latency reduction.
+                            </p>
+                            <div class="project-tags">
+                                <span>LangChain</span>
+                                <span>AI Agents</span>
+                                <span>FAISS</span>
+                                <span>RAG</span>
+                                <span>FastAPI</span>
+                                <span>React</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card reveal delay-2">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i data-lucide="activity"></i>
+                            </div>
+                            <div class="project-header-right">
+                                <a href="https://github.com/karthikvirodhula/Yogamate" target="_blank" rel="noopener" class="project-header-link" title="Codebase">
+                                    <span>Codebase</span>
+                                    <i data-lucide="github"></i>
+                                </a>
+                                <span class="project-date">2025</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">YogaMate - AI Voice Trainer</h3>
+                            <div class="project-metrics">
+                                <span class="metric-badge"><i data-lucide="check-circle"></i> 90% Detection Accuracy</span>
+                                <span class="metric-badge"><i data-lucide="gauge"></i> 25+ Realtime FPS</span>
+                            </div>
+                            <p class="project-description">
+                                Developed a real-time posture correction system using OpenCV and MediaPipe, accurately evaluating standard yoga poses. Optimized posture tracking and AI voice feedback pipeline to consistently achieve 25+ FPS for smooth, real-time feedback.
+                            </p>
+                            
+                            <!-- YogaMate Pose Visualizer Canvas -->
+                            <div class="project-visual-preview">
+                                <div class="yogamate-canvas-container">
+                                    <canvas id="yogamate-canvas" width="280" height="150"></canvas>
+                                    <div class="pose-feedback-label feedback-correct" id="pose-feedback">Perfect alignment - 90°</div>
+                                </div>
+                            </div>
+
+                            <div class="project-tags">
+                                <span>OpenCV</span>
+                                <span>MediaPipe</span>
+                                <span>Machine Learning</span>
+                                <span>Voice APIs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills">
+            <div class="container">
+
+                <div class="skills-container">
+                    <!-- Category 1 -->
+                    <div class="skills-card reveal">
+                        <div class="skills-card-header">
+                            <i data-lucide="terminal"></i>
+                            <h3>Languages & Frameworks</h3>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Java</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">FastAPI</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Spring Boot</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="skills-card reveal delay-1">
+                        <div class="skills-card-header">
+                            <i data-lucide="sparkles"></i>
+                            <h3>Generative AI & LLMs</h3>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">LangChain / LangGraph</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 92%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Agentic Workflows</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">RAG Pipelines</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">LLM Orchestration / Tool Calling</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 88%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="skills-card reveal delay-2">
+                        <div class="skills-card-header">
+                            <i data-lucide="database"></i>
+                            <h3>Machine Learning & Data</h3>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Machine & Deep Learning</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Pandas / NumPy</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">MediaPipe / OpenCV</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Web Scraping (BeautifulSoup)</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 88%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 4 -->
+                    <div class="skills-card reveal delay-3">
+                        <div class="skills-card-header">
+                            <i data-lucide="wrench"></i>
+                            <h3>Databases & Tools</h3>
+                        </div>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">PostgreSQL / MySQL</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">FAISS / BM25 Vector Search</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Git / Version Control</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Linux & Jupyter Notebooks</span>
+                                <div class="skill-bar"><div class="skill-progress" style="width: 92%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements & Certifications Section -->
+        <section id="achievements" class="section achievements">
+            <div class="container">
+
+                <div class="achievements-grid">
+                    <!-- Achievements Panel -->
+                    <div class="achievements-panel reveal">
+                        <h3 class="panel-subtitle"><i data-lucide="award"></i> Key Achievements</h3>
+                        <div class="achievement-cards">
+                            <div class="achievement-item-card">
+                                <div class="achievement-icon-wrapper">
+                                    <i data-lucide="trophy"></i>
+                                </div>
+                                <div class="achievement-content-info">
+                                    <h4>Smart India Hackathon (SIH) Finalist</h4>
+                                    <span class="achievement-date">Sep 2024</span>
+                                    <p>Selected as a finalist in the Deep Learning domain at the Internal Smart India Hackathon, SRKR. Designed innovative, AI-powered solutions to solve challenging real-world problems.</p>
+                                </div>
+                            </div>
+                            <div class="achievement-item-card coding-dashboard-card">
+                                <div class="achievement-icon-wrapper">
+                                    <i data-lucide="code-2"></i>
+                                </div>
+                                <div class="achievement-content-info" style="width: 100%;">
+                                    <h4>Coding Achievements & Metrics</h4>
+                                    <span class="achievement-date">Active</span>
+                                    <p>Solved over <strong>350+ coding problems</strong> across platforms like LeetCode and GeeksforGeeks. Earned the Java Badge on LeetCode representing robust problem-solving fundamentals.</p>
+                                    
+                                    <!-- LeetCode Stats Visualization -->
+                                    <div class="leetcode-stats-visual">
+                                        <div class="leetcode-circle-progress">
+                                            <svg class="progress-ring" width="80" height="80">
+                                                <circle class="progress-ring-circle-bg" stroke="rgba(255,255,255,0.03)" stroke-width="6" fill="transparent" r="34" cx="40" cy="40"/>
+                                                <circle class="progress-ring-circle" id="leetcode-progress" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" fill="transparent" r="34" cx="40" cy="40" style="stroke-dasharray: 213.63; stroke-dashoffset: 213.63;"/>
+                                            </svg>
+                                            <div class="leetcode-progress-text">
+                                                <span class="num" id="leetcode-count">350+</span>
+                                                <span class="lbl">Solved</span>
+                                            </div>
+                                        </div>
+                                        <div class="leetcode-bars">
+                                            <div class="leetcode-bar-item">
+                                                <div class="bar-info"><span>Easy</span><span class="easy-count">145</span></div>
+                                                <div class="bar-track"><div class="bar-fill leetcode-easy" style="width: 82%;"></div></div>
+                                            </div>
+                                            <div class="leetcode-bar-item">
+                                                <div class="bar-info"><span>Medium</span><span class="medium-count">170</span></div>
+                                                <div class="bar-track"><div class="bar-fill leetcode-medium" style="width: 68%;"></div></div>
+                                            </div>
+                                            <div class="leetcode-bar-item">
+                                                <div class="bar-info"><span>Hard</span><span class="hard-count">35</span></div>
+                                                <div class="bar-track"><div class="bar-fill leetcode-hard" style="width: 38%;"></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certifications Panel -->
+                    <div class="certifications-panel reveal delay-2">
+                        <h3 class="panel-subtitle"><i data-lucide="award"></i> Certifications</h3>
+                        <div class="cert-grid">
+                            <a href="https://drive.google.com/file/d/1T2g5ktAj-rspnvAMTXrMF-P_1sn2BrDo/view?usp=drivesdk" target="_blank" rel="noopener" class="cert-card">
+                                <i data-lucide="award" class="cert-badge-icon"></i>
+                                <div class="cert-info">
+                                    <h4>AI/ML Internship</h4>
+                                    <p>Blackbuck Engineers & APSCHE - AI-ML-DS 8-week duration</p>
+                                </div>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1TwiCeA-jKOa9n7FIkV4mLP1D-XGPQ6kO/view?usp=drivesdk" target="_blank" rel="noopener" class="cert-card">
+                                <i data-lucide="award" class="cert-badge-icon"></i>
+                                <div class="cert-info">
+                                    <h4>SIH 2024 Internal Hackathon Finalist</h4>
+                                    <p>Developed Deep Learning solutions, SRKR Engineering College</p>
+                                </div>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1T0YOJrUEQnGAG5oK4e5J48cG6s3mkW0p/view" target="_blank" rel="noopener" class="cert-card">
+                                <i data-lucide="award" class="cert-badge-icon"></i>
+                                <div class="cert-info">
+                                    <h4>MLOps Workshop</h4>
+                                    <p>Hands-on MLOps, CSE & SRKREC Alumni Association</p>
+                                </div>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1IN4TSA4IUeTm92FX_Qr4WgapG_l1hgtf/view?usp=drivesdk" target="_blank" rel="noopener" class="cert-card">
+                                <i data-lucide="award" class="cert-badge-icon"></i>
+                                <div class="cert-info">
+                                    <h4>Data Science & ML Bootcamp</h4>
+                                    <p>Udemy Professional Certification by Krish Naik (99 hours)</p>
+                                </div>
+                            </a>
+                            <a href="https://drive.google.com/file/d/1Sl8Uwq3TzY4JHRmEFAgP36aDOJTp3K3t/view?usp=drivesdk" target="_blank" rel="noopener" class="cert-card">
+                                <i data-lucide="award" class="cert-badge-icon"></i>
+                                <div class="cert-info">
+                                    <h4>Activator Camp - AlgoUniversity</h4>
+                                    <p>CS Basics, DSA, and development & AI tools workshop</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info-panel reveal">
+                        <h3 class="contact-subtitle">Let's build something intelligent together</h3>
+                        <p class="contact-desc">
+                            Have an interesting project, job opportunity, or just want to chat about AI agents, vector search, or machine learning pipelines? Reach out through any of these channels or drop a message!
+                        </p>
+                        
+                        <div class="contact-details">
+                            <a href="mailto:rongalamanindra2004@gmail.com" class="contact-item">
+                                <div class="contact-icon">
+                                    <i data-lucide="mail"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <span class="label">Email</span>
+                                    <span class="value">rongalamanindra2004@gmail.com</span>
+                                </div>
+                            </a>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <span class="label">Location</span>
+                                    <span class="value">Bhimavaram / Hyderabad, India</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-social-icons">
+                            <a href="https://github.com/manindrarongala" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub">
+                                <i data-lucide="github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/manindra-rongala/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+                                <i data-lucide="linkedin"></i>
+                            </a>
+                            <a href="https://leetcode.com/u/manindrarongala/" target="_blank" rel="noopener" class="social-icon-btn" title="Leetcode">
+                                <i data-lucide="code-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-panel reveal delay-2">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="form-name">Your Name</label>
+                                <input type="text" id="form-name" required placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email">Your Email</label>
+                                <input type="email" id="form-email" required placeholder="Enter your email address">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-message">Your Message</label>
+                                <textarea id="form-message" required rows="4" placeholder="Write your message here..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit-btn">
+                                <span>Send Message</span>
+                                <i data-lucide="send"></i>
+                            </button>
+                            <div id="form-status" class="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p class="copyright">&copy; 2026 Manindra Rongala. All rights reserved.</p>
+            <p class="footer-design">Designed & Built with <span class="heart-pulse">❤️</span> for HR</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js?v=2.0"></script>
+</body>
+</html>
