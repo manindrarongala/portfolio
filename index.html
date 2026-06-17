@@ -24,6 +24,64 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css?v=3.0">
     
+    <style>
+        /* Force black background & white text to override any cached styles */
+        :root {
+            --bg-darker: #000000 !important;
+            --bg-dark: #080808 !important;
+            --bg-card: rgba(18, 18, 18, 0.8) !important;
+            --bg-card-hover: rgba(28, 28, 30, 0.95) !important;
+            --text-muted: #8e8e93 !important;
+            --text-normal: #e5e5ea !important;
+            --text-white: #ffffff !important;
+            --border-color: rgba(255, 255, 255, 0.08) !important;
+            --accent: #ffffff !important;
+            --accent-rgb: 255, 255, 255 !important;
+            --accent-glow: rgba(255, 255, 255, 0.08) !important;
+            --accent-glow-strong: rgba(255, 255, 255, 0.25) !important;
+            --accent-secondary: #e5e5ea !important;
+            --shadow-glow: 0 0 18px rgba(255, 255, 255, 0.18) !important;
+            --shadow-glow-hover: 0 0 30px rgba(255, 255, 255, 0.35) !important;
+        }
+        body {
+            background-color: #000000 !important;
+            color: #e5e5ea !important;
+        }
+        .grid-bg-overlay {
+            background-color: #000000 !important;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px) !important;
+        }
+        .header {
+            background-color: rgba(0, 0, 0, 0.75) !important;
+        }
+        .header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+        }
+        /* Style fixes for buttons & links in monochrome mode */
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border-color: #ffffff !important;
+        }
+        .social-link {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            color: #8e8e93 !important;
+        }
+        .social-link:hover {
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2) !important;
+        }
+    </style>
+    
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0.395.0"></script>
 </head>
