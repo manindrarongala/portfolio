@@ -4,37 +4,37 @@
 
 /* 1. Theme Configurations & CSS Variables */
 :root {
-    /* Color Palette base (GitHub Light theme) */
-    --bg-darker: #FFFFFF;
-    --bg-dark: #F6F8FA;
-    --bg-card: #F6F8FA;
-    --bg-card-hover: #eaeff2;
+    /* Color Palette base (Premium Black-White Monochrome theme) */
+    --bg-darker: #000000;
+    --bg-dark: #080808;
+    --bg-card: rgba(18, 18, 18, 0.8);
+    --bg-card-hover: rgba(28, 28, 30, 0.95);
     
-    --text-muted: #57606a;
-    --text-normal: #24292F;
-    --text-white: #24292F;
+    --text-muted: #8e8e93;
+    --text-normal: #e5e5ea;
+    --text-white: #ffffff;
     
-    --border-color: #d0d7de;
-    --border-color-glow: rgba(var(--accent-rgb), 0.25);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color-glow: rgba(var(--accent-rgb), 0.3);
 
     /* Fonts */
     --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-code: 'Fira Code', 'Courier New', Courier, monospace;
 
-    /* Theme Accents (GitHub Blue Accent) */
-    --accent: #0969DA;
-    --accent-rgb: 9, 105, 218;
-    --accent-glow: rgba(9, 105, 218, 0.08);
-    --accent-glow-strong: rgba(9, 105, 218, 0.25);
-    --accent-secondary: #0550ae;
+    /* Theme Accents (Pure White Accent) */
+    --accent: #ffffff;
+    --accent-rgb: 255, 255, 255;
+    --accent-glow: rgba(255, 255, 255, 0.08);
+    --accent-glow-strong: rgba(255, 255, 255, 0.25);
+    --accent-secondary: #e5e5ea;
     
-    /* Box Shadows & Glows */
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
-    --shadow-lg: 0 12px 28px rgba(0,0,0,0.1);
-    --shadow-glow: 0 0 15px rgba(var(--accent-rgb), 0.15);
-    --shadow-glow-hover: 0 0 25px rgba(var(--accent-rgb), 0.25);
+    /* Box Shadows & Glows (Highly pronounced on black) */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 18px rgba(var(--accent-rgb), 0.18);
+    --shadow-glow-hover: 0 0 30px rgba(var(--accent-rgb), 0.35);
     
     /* Transitions */
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -44,35 +44,35 @@
 
 /* Theme Variant Rulesets */
 [data-theme="cyan"] {
-    --accent: #0969DA;
-    --accent-rgb: 9, 105, 218;
-    --accent-glow: rgba(9, 105, 218, 0.08);
-    --accent-glow-strong: rgba(9, 105, 218, 0.25);
-    --accent-secondary: #0550ae;
+    --accent: #ffffff;
+    --accent-rgb: 255, 255, 255;
+    --accent-glow: rgba(255, 255, 255, 0.08);
+    --accent-glow-strong: rgba(255, 255, 255, 0.25);
+    --accent-secondary: #e5e5ea;
 }
 
 [data-theme="purple"] {
-    --accent: #8250DF;
-    --accent-rgb: 130, 80, 223;
-    --accent-glow: rgba(130, 80, 223, 0.08);
-    --accent-glow-strong: rgba(130, 80, 223, 0.25);
-    --accent-secondary: #6530c3;
+    --accent: #a855f7;
+    --accent-rgb: 168, 85, 247;
+    --accent-glow: rgba(168, 85, 247, 0.12);
+    --accent-glow-strong: rgba(168, 85, 247, 0.35);
+    --accent-secondary: #9333ea;
 }
 
 [data-theme="emerald"] {
-    --accent: #1A7F37;
-    --accent-rgb: 26, 127, 55;
-    --accent-glow: rgba(26, 127, 55, 0.08);
-    --accent-glow-strong: rgba(26, 127, 55, 0.25);
-    --accent-secondary: #115e29;
+    --accent: #10b981;
+    --accent-rgb: 16, 185, 129;
+    --accent-glow: rgba(16, 185, 129, 0.12);
+    --accent-glow-strong: rgba(16, 185, 129, 0.35);
+    --accent-secondary: #059669;
 }
 
 [data-theme="amber"] {
-    --accent: #BF4F00;
-    --accent-rgb: 191, 79, 0;
-    --accent-glow: rgba(191, 79, 0, 0.08);
-    --accent-glow-strong: rgba(191, 79, 0, 0.25);
-    --accent-secondary: #973c00;
+    --accent: #f59e0b;
+    --accent-rgb: 245, 158, 11;
+    --accent-glow: rgba(245, 158, 11, 0.12);
+    --accent-glow-strong: rgba(245, 158, 11, 0.35);
+    --accent-secondary: #d97706;
 }
 
 /* ==========================================================================
@@ -120,8 +120,8 @@ body {
     pointer-events: none;
     background-color: var(--bg-darker);
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
     background-size: 60px 60px;
     background-position: center;
 }
@@ -362,14 +362,14 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(12px);
     transition: all var(--transition-normal);
 }
 
 .header.scrolled {
     height: 70px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     box-shadow: var(--shadow-sm);
 }
 
