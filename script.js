@@ -2,6 +2,13 @@
    Manindra Rongala Portfolio - Interactivity & Visual Effects
    ========================================================================== */
 
+// Global LERP position variables for smooth motion
+let mousePos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+let dotPos = { ...mousePos };
+let ringPos = { ...mousePos };
+let spotlightPos = { ...mousePos };
+window.portfolioMouseActive = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialise Lucide Icons
     if (typeof lucide !== 'undefined') {
@@ -32,12 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // 9. Interactive Hero Terminal Shell
     initInteractiveTerminal();
 
+    // 10. Premium Custom Spotlight Glide (No Cursor Circle)
+    initSpotlightTracking();
 
+    // 11. Magnetic Hover Animations for Interactive Elements
+    initMagneticHover();
 
-    // 11. YogaMate Pose Animator
+    // 12. Staggered Child Reveal Animations
+    initStaggeredReveals();
+
+    // 13. Mobile Touch spring-animations support
+    initTouchInteractions();
+
+    // 14. YogaMate Pose Animator
     initYogaMateAnimator();
 
-    // 12. LeetCode Dashboard Animator
+    // 15. LeetCode Dashboard Animator
     initLeetCodeAnimator();
 });
 
@@ -52,7 +69,7 @@ function initParticleCanvas() {
     let particles = [];
     let animationId = null;
 
-    // Mouse coordinates tracking
+    // Mouse coordinates tracking using LERPed coordinates
     const mouse = {
         x: null,
         y: null,
@@ -60,16 +77,13 @@ function initParticleCanvas() {
     };
 
     window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        // Update CSS variables for hardware-accelerated spotlight gradient
-        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        window.portfolioMouseActive = true;
+        mousePos.x = e.clientX;
+        mousePos.y = e.clientY;
     });
 
     window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
+        window.portfolioMouseActive = false;
     });
 
     // Particle class definition (Soft glowing bokeh spheres)
@@ -166,6 +180,15 @@ function initParticleCanvas() {
     // Animation Loop
     function animate() {
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        
+        // Feed smoothly LERPed spotlight coordinates to particles for soft evasion
+        if (window.portfolioMouseActive) {
+            mouse.x = spotlightPos.x;
+            mouse.y = spotlightPos.y;
+        } else {
+            mouse.x = null;
+            mouse.y = null;
+        }
         
         const w = window.innerWidth;
         const h = window.innerHeight;
@@ -278,6 +301,26 @@ function initScrollReveals() {
     revealItems.forEach(item => {
         revealObserver.observe(item);
     });
+
+    // Staggered scroll entrance reveals for child items
+    const revealChildren = document.querySelectorAll('.reveal-child');
+    const childObserver = new IntersectionObserver((entries, observer) => {
+        const intersecting = entries.filter(e => e.isIntersecting);
+        intersecting.forEach((entry, idx) => {
+            const el = entry.target;
+            // Delay based on viewport entrance order
+            el.style.setProperty('--delay', `${idx * 60}ms`);
+            el.classList.add('active');
+            observer.unobserve(el);
+        });
+    }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -30px 0px'
+    });
+
+    revealChildren.forEach(child => {
+        childObserver.observe(child);
+    });
 }
 
 /* ==========================================================================
@@ -382,22 +425,38 @@ function initNavigation() {
         });
     }
 
-    // Tabbed Section Handler
+    // Tabbed Section Handler with Spring Transitions
     function showSection(targetId) {
         if (!targetId.startsWith('#')) targetId = '#' + targetId;
         const targetEl = document.querySelector(targetId);
         if (!targetEl) return;
 
-        sections.forEach(sec => {
-            if ('#' + sec.id === targetId) {
-                sec.classList.remove('section-view-hidden');
+        const currentActive = Array.from(sections).find(sec => !sec.classList.contains('section-view-hidden'));
+
+        if (currentActive && currentActive !== targetEl) {
+            // Animate out the active section
+            currentActive.classList.add('section-animating-out');
+            
+            setTimeout(() => {
+                currentActive.classList.remove('section-animating-out');
+                currentActive.classList.add('section-view-hidden');
                 
-                // Force all reveals to active inside showing section
-                sec.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                // Show and animate in the new section
+                targetEl.classList.remove('section-view-hidden');
+                targetEl.classList.add('section-animating-in');
+                
+                // Trigger reveal children with staggered sequence
+                targetEl.querySelectorAll('.reveal-child').forEach((el, index) => {
+                    el.style.setProperty('--delay', `${index * 70}ms`);
+                    setTimeout(() => el.classList.add('active'), 50);
+                });
+
+                // Force standard reveal active states
+                targetEl.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
                 
                 // Animate skill progress bars if navigating to Skills
-                if (sec.id === 'skills') {
-                    const progressBars = sec.querySelectorAll('.skill-progress');
+                if (targetEl.id === 'skills') {
+                    const progressBars = targetEl.querySelectorAll('.skill-progress');
                     progressBars.forEach(bar => {
                         if (!bar.dataset.targetWidth) {
                             bar.dataset.targetWidth = bar.style.width || '100%';
@@ -409,10 +468,27 @@ function initNavigation() {
                         }, 100);
                     });
                 }
-            } else {
-                sec.classList.add('section-view-hidden');
-            }
-        });
+
+                // Cleanup animation classes
+                setTimeout(() => {
+                    targetEl.classList.remove('section-animating-in');
+                }, 850);
+            }, 350);
+        } else {
+            // Fallback for initial load
+            sections.forEach(sec => {
+                if ('#' + sec.id === targetId) {
+                    sec.classList.remove('section-view-hidden');
+                    sec.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                    sec.querySelectorAll('.reveal-child').forEach((el, index) => {
+                        el.style.setProperty('--delay', `${index * 70}ms`);
+                        setTimeout(() => el.classList.add('active'), 50);
+                    });
+                } else {
+                    sec.classList.add('section-view-hidden');
+                }
+            });
+        }
 
         // Update Nav Link classes
         navLinks.forEach(link => {
@@ -536,23 +612,52 @@ function initContactForm() {
             lucide.createIcons();
         }
 
-        // Simulate form submission
-        setTimeout(() => {
+        // Send AJAX request to FormSubmit API
+        fetch("https://formsubmit.co/ajax/rongalamanindra2004@gmail.com", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                message: message
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Failed to send message.");
+            }
+        })
+        .then(data => {
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalBtnHtml;
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
 
-            status.textContent = `Thank you, ${name}! Your message has been sent successfully.`;
+            status.textContent = `Thank you, ${name}! Your message was sent successfully. (Note: first submission requires email activation).`;
             status.className = 'form-status success';
             form.reset();
 
             // Clear status after some time
             setTimeout(() => {
-                status.style.display = 'none';
-            }, 5000);
-        }, 1500);
+                status.className = 'form-status';
+            }, 6000);
+        })
+        .catch(error => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            status.textContent = 'Oops! Something went wrong. Please try again later.';
+            status.className = 'form-status error';
+        });
     });
 }
 
@@ -617,9 +722,10 @@ function initInteractiveTerminal() {
 
     const qaPairs = [
         { keywords: ['sih', 'hackathon'], answer: "🏆 Selected as a finalist in the Deep Learning domain at the Internal Smart India Hackathon (SIH 2024, SRKR) in September 2024." },
-        { keywords: ['yanthraa', 'intern', 'experience'], answer: "💼 Machine Learning Intern at Yanthraa Information System (Nov 2025 - Jan 2026):\n- Engineered FastAPI AI voice services integrated with EHR systems (improved data speed by 30%).\n- Optimized ElevenLabs voice agent workflows (latency reduction & +25% accuracy)." },
+        { keywords: ['yanthraa', 'intern', 'experience'], answer: "💼 Machine Learning Intern at Yanthraa Information System (Nov 2025 - Jan 2026):\n- Engineered FastAPI AI voice services integrated with EHR systems (improved data speed by 30%).\n- Optimized ElevenLabs voice agents and REST APIs, improving response accuracy and significantly reducing end-to-end latency." },
         { keywords: ['rag', 'retrieval', 'vector', 'faiss', 'bm25', 'dsa'], answer: "⚡ Agentic RAG DSA Pipeline & Quiz Generator (2026):\n- Hybrid BM25 & FAISS retrieval pipeline over 500+ coding problems.\n- Groq Llama-3.1 LLM reranking (retrieval accuracy +40%, hallucinations -35%)." },
         { keywords: ['yoga', 'pose', 'mediapipe', 'opencv'], answer: "🧘 YogaMate - AI Voice Trainer (2025):\n- Real-time pose tracking & angles correction via MediaPipe & OpenCV.\n- Real-time voice pipeline delivering 25+ FPS at 90% posture detection accuracy." },
+        { keywords: ['classifier', 'email', 'job email', 'groq', 'llama', 'gmail', 'inbox'], answer: "📧 AI-Powered Job Email Classifier (2026):\n- Automated Gmail retrieval & parsing over IMAP using App Passwords.\n- Custom HTMLParser subclass reduces token sizes by 80%.\n- Groq-hosted LLaMA 3.1 inference engine (temp=0) classifies emails with validated Pydantic enums." },
         { keywords: ['skills', 'languages', 'frameworks'], answer: "🛠️ Core Technical Stack:\n- Languages: Python, Java\n- Frameworks: FastAPI, Spring Boot, LangChain, LangGraph\n- Databases: PostgreSQL, MySQL, FAISS (Vector DB)" },
         { keywords: ['college', 'gpa', 'grade', 'education', 'srkr'], answer: "🎓 Sagi Rama Krishnam Raju Engineering College (SRKR):\n- B.Tech in Artificial Intelligence & Machine Learning (2022 - 2026)\n- Cumulative CGPA: 8.62 / 10." },
         { keywords: ['leetcode', 'code', 'problems'], answer: "💻 Coding Metrics:\n- Solved 350+ data structures & algorithm problems.\n- Earned the LeetCode Java Problem-Solving Badge." }
@@ -650,7 +756,7 @@ function initInteractiveTerminal() {
         }
 
         if (lowerCmd === 'projects') {
-            printLine("🚀 Key Projects:\n1. Agentic RAG DSA Pipeline - Hybrid FAISS/BM25 retrieval quiz engine.\n2. AI Research Assistant - High-volume document parser (+45% relevance).\n3. YogaMate - Real-time MediaPipe postural trainer.");
+            printLine("🚀 Key Projects:\n1. Agentic RAG DSA Pipeline - Hybrid FAISS/BM25 retrieval quiz engine.\n2. AI Research Assistant - High-volume document parser (+45% relevance).\n3. AI Job Email Classifier - Real-time email parsing & classification.\n4. YogaMate - Real-time MediaPipe postural trainer.");
             return;
         }
 
@@ -915,5 +1021,116 @@ function initLeetCodeAnimator() {
     });
 
     observer.observe(card);
+}
+
+/* ==========================================================================
+   13. Premium Custom Spotlight Tracking Loop
+   ========================================================================== */
+function initSpotlightTracking() {
+    // Initial position matching center screen
+    mousePos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    spotlightPos = { ...mousePos };
+
+    // Run unified LERP animation tick for background spotlight
+    updateSpotlight();
+}
+
+function updateSpotlight() {
+    // Lerp spotlight position (extra smooth glide)
+    spotlightPos.x += (mousePos.x - spotlightPos.x) * 0.12;
+    spotlightPos.y += (mousePos.y - spotlightPos.y) * 0.12;
+    
+    // Set variables for radial gradient spotlight
+    document.documentElement.style.setProperty('--mouse-x', `${spotlightPos.x}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${spotlightPos.y}px`);
+    
+    requestAnimationFrame(updateSpotlight);
+}
+
+/* ==========================================================================
+   14. Magnetic Hover Animations
+   ========================================================================== */
+function initMagneticHover() {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    const targets = document.querySelectorAll('.btn, .social-link, .social-icon-btn, .color-dot, .term-tab, .logo, .theme-switcher-toggle');
+
+    targets.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            // Pull element 28% towards the cursor coordinate
+            el.style.transform = `translate3d(${x * 0.28}px, ${y * 0.28}px, 0)`;
+            el.style.transition = 'transform 0.1s ease-out';
+            
+            // Sub-parallax pull for icons (40% velocity)
+            const icon = el.querySelector('i, svg');
+            if (icon) {
+                icon.style.transform = `translate3d(${x * 0.12}px, ${y * 0.12}px, 0)`;
+                icon.style.transition = 'transform 0.08s ease-out';
+            }
+        });
+
+        el.addEventListener('mouseleave', () => {
+            // Elastic spring back to center
+            el.style.transform = 'translate3d(0, 0, 0)';
+            el.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            
+            const icon = el.querySelector('i, svg');
+            if (icon) {
+                icon.style.transform = 'translate3d(0, 0, 0)';
+                icon.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            }
+        });
+    });
+}
+
+/* ==========================================================================
+   15. Staggered Child Entrance Reveals
+   ========================================================================== */
+function initStaggeredReveals() {
+    const listSelectors = [
+        '.projects-grid',
+        '.skills-container',
+        '.skills-list',
+        '.timeline',
+        '.achievement-cards',
+        '.cert-grid'
+    ];
+
+    listSelectors.forEach(sel => {
+        const container = document.querySelector(sel);
+        if (!container) return;
+
+        Array.from(container.children).forEach((child) => {
+            child.classList.add('reveal-child');
+        });
+    });
+}
+
+/* ==========================================================================
+   16. Mobile Touch Spring Interactions
+   ========================================================================== */
+function initTouchInteractions() {
+    const cardSelectors = '.project-card, .skills-card, .achievement-item-card, .cert-card, .timeline-item, .contact-info-panel, .contact-form-panel, .stat-card';
+    const cards = document.querySelectorAll(cardSelectors);
+
+    cards.forEach(card => {
+        card.addEventListener('touchstart', () => {
+            card.classList.add('touch-active');
+        }, { passive: true });
+
+        card.addEventListener('touchend', () => {
+            setTimeout(() => {
+                card.classList.remove('touch-active');
+            }, 180); // Slight delay to let the user see the spring-back movement
+        }, { passive: true });
+
+        card.addEventListener('touchcancel', () => {
+            card.classList.remove('touch-active');
+        }, { passive: true });
+    });
 }
 
